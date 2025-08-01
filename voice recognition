@@ -1,0 +1,27 @@
+String inputCommand = "";
+
+void setup() {
+  pinMode(8, OUTPUT);       // LED pin
+  Serial.begin(9600);
+  Serial.println("Speech Recognition System Ready");
+}
+
+void loop() {
+  if (Serial.available()) {
+    inputCommand = Serial.readStringUntil('\n');  // Read command from Serial Monitor
+
+    inputCommand.trim();  // Remove whitespace
+
+    if (inputCommand == "LED ON") {
+      digitalWrite(8, HIGH);
+      Serial.println("LED Turned ON");
+    }
+    else if (inputCommand == "LED OFF") {
+      digitalWrite(8, LOW);
+      Serial.println("LED Turned OFF");
+    }
+    else {
+      Serial.println("Unknown command");
+    }
+  }
+}
